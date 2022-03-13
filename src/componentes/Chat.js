@@ -1,18 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import socket from "./Socket";
 import "../App.css";
+import axios from 'axios'
 
 const Chat = ({ nombre }) => {
   const [mensaje, setMensaje] = useState("");
   const [mensajes, setMensajes] = useState([]);
+  const [respuestas, setRespuestas] = useState([]);
+  const url = 'http://127.0.0.1:4000/chat'
 
+  
   useEffect(() => {
     socket.emit("conectado", nombre);
   }, [nombre]);
 
   useEffect(() => {
+    const fetchMensaje = (msg_emisor) => {
+      axios.post(url,{
+        "entrada": msg_emisor
+      }).then((response) => {
+        socket.emit("respuesta", response.data.nombre,response.data.mensaje);
+        console.log(response.data)
+      });
+    }
+
     socket.on("mensajes", (mensaje) => {
       setMensajes([...mensajes, mensaje]);
+      fetchMensaje(mensaje)
+    });
+
+    socket.on("respuestas", (respuesta) => {
+      setRespuestas([...mensajes, respuesta]);
+      console.log(respuesta)
     });
 
     return () => {
@@ -34,7 +53,8 @@ const Chat = ({ nombre }) => {
   return (
     <div className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
       <div className="flex flex-col  h-72 space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-        {mensajes.map((e, i) => (
+        
+        {respuestas && respuestas.map((e, i) => (
           <div key={i} className="flex items-end justify-end rounded-lg">
             <div className="flex flex-col bg-gray-200 rounded-lg p-2 space-y-2 text-xs max-w-xs mx-2 order-2 items-start">{e.mensaje}</div>
             <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">{e.nombre}</div>
