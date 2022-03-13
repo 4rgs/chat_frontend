@@ -36,7 +36,7 @@ const Chat = ({ nombre }) => {
       <div className="flex flex-col  h-72 space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
         {mensajes.map((e, i) => (
           <div key={i} className="flex items-end justify-end rounded-lg">
-            <div className="flex flex-col bg-gray-100 rounded-lg p-2 space-y-2 text-xs max-w-xs mx-2 order-2 items-start">{e.mensaje}</div>
+            <div className="flex flex-col bg-gray-200 rounded-lg p-2 space-y-2 text-xs max-w-xs mx-2 order-2 items-start">{e.mensaje}</div>
             <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">{e.nombre}</div>
           </div>
         ))}
@@ -52,7 +52,7 @@ const Chat = ({ nombre }) => {
           value={mensaje}
           onChange={(e) => setMensaje(e.target.value)}
         ></input>
-        <button className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">Enviar</button>
+        <button className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-orange-600 hover:bg-orange-500 focus:outline-none">Enviar</button>
       </form>
     </div>
   );
