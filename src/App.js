@@ -15,10 +15,10 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-700 flex flex-col justify-center sm:py-8">
-      <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-      <img src={logo} className="App-logo w-24 h-24 font-bold text-center text-xl mb-1 " alt="Helena" />
-      <label className="text-center font-bold text-center text-2xl mb-5 text-2xl font-bold text-transparent md:text-3xl bg-clip-text bg-gradient-to-r from-orange-400  to-orange-800">Helena</label>
+    <div className="bg-slate-700 min-h-screen">
+      <div className="p-2">
+      <img src={logo} className="App-logo  mx-auto w-24 h-24 font-bold text-center text-xl mb-1 " alt="Helena" />
+      <label className="flex-inline text-center font-bold text-center text-2xl mb-5 text-2xl font-bold text-transparent md:text-3xl bg-clip-text bg-gradient-to-r from-orange-400  to-orange-800">HelenAI</label>
       <div className="bg-gray-100 z-20 shadow w-full rounded-lg divide-y divide-gray-200">
         {!registrado && (
           <form onSubmit={registrar} className="px-5 py-7">
